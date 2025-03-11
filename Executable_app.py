@@ -7,7 +7,7 @@ PASSWORD = "your_secure_password"
 password = st.text_input("Enter password:", type="password")
 
 # Check if the password is correct
-if password == PASSWORD:
+if password == Camelot2025!:
     # Your app's main content here
     st.write("Welcome to the app!")
     
