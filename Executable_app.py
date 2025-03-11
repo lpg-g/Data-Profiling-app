@@ -1,4 +1,25 @@
 import streamlit as st
+
+# Set the correct password
+PASSWORD = "your_secure_password"
+
+# Prompt for password
+password = st.text_input("Enter password:", type="password")
+
+# Check if the password is correct
+if password == PASSWORD:
+    # Your app's main content here
+    st.write("Welcome to the app!")
+    
+    # Your app code goes here (e.g., data profiling, etc.)
+    # Example:
+    # df = pd.read_csv('file.csv')
+    # st.write(df)
+else:
+    st.write("Incorrect password. Please try again.")
+
+
+import streamlit as st
 import pandas as pd
 from ydata_profiling import ProfileReport
 from streamlit.components.v1 import html
