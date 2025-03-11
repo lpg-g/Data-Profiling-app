@@ -1,13 +1,13 @@
 import streamlit as st
 
 # Set the correct password
-PASSWORD = "your_secure_password"
+PASSWORD = "Camelot2025!"
 
 # Prompt for password
 password = st.text_input("Enter password:", type="password")
 
 # Check if the password is correct
-if password == Camelot2025!:
+if password == PASSWORD:
     # Your app's main content here
     st.write("Welcome to the app!")
     
