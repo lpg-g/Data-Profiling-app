@@ -8,21 +8,27 @@ import os
 # Set the correct password
 PASSWORD = "Camelot2025!"
 
-# Session state to track authentication status
+# Initialize authentication state
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
+if "password_entered" not in st.session_state:
+    st.session_state["password_entered"] = False
 
-# Password input if not authenticated
+# Prompt for password if not authenticated
 if not st.session_state["authenticated"]:
-    password = st.text_input("Enter password:", type="password")
-    if st.button("Login"):
-        if password == PASSWORD:
-            st.session_state["authenticated"] = True
-            st.success("Password correct! Access granted.")
-        else:
-            st.error("Incorrect password. Please try again.")
-else:
-    # Main app content starts here after successful authentication
+    with st.form("login_form"):
+        password = st.text_input("Enter password:", type="password")
+        submitted = st.form_submit_button("Login")
+        
+        if submitted:
+            if password == PASSWORD:
+                st.session_state["authenticated"] = True
+                st.success("Password correct! Access granted.")
+            else:
+                st.error("Incorrect password. Please try again.")
+
+# Main app content after successful authentication
+if st.session_state["authenticated"]:
     st.title("📊 Data Profiler - CSV & Excel Files")
 
     # File uploader
@@ -33,10 +39,8 @@ else:
         try:
             # Check the file extension to determine whether it's a CSV or Excel file
             if uploaded_file.name.endswith(".csv"):
-                # Load CSV file
                 df = pd.read_csv(uploaded_file)
             elif uploaded_file.name.endswith(".xlsx"):
-                # Load Excel file
                 df = pd.read_excel(uploaded_file)
             else:
                 st.error("Unsupported file type. Please upload a CSV or Excel file.")
@@ -44,7 +48,6 @@ else:
 
             # If the dataframe is loaded, proceed with profiling
             if df is not None:
-                # Display the dataframe preview
                 st.write("### Preview of Uploaded Data", df.head())
 
                 # Generate the profiling report
